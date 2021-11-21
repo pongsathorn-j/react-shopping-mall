@@ -1,0 +1,18 @@
+{
+    "welcome": "Welcome",
+    "signin": "Sign In",
+    "signup": "Sign Up",
+    "signout": "Sign Out",
+    "placeholderSearch": "Search a product, category or brand",
+    "menuHome": "Home",
+    "menuCatelog": "Catelories",
+    "menuFruit": "Fruits & Vegetables",
+    "menuPromotion": "Promotion",
+    "menuContact": "Contact Us",
+    "forgotPassword": "Forgot password?",
+    "menuAdminCatelog": "Manage Product",
+    "faqs": "FAQs",
+    "menuProfile": "Profile",
+    "menuSetting": "Settings",
+    "cart": "Cart"
+}

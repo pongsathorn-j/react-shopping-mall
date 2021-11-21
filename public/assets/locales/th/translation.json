@@ -1,0 +1,18 @@
+{
+    "welcome": "ยินดีต้อนรับ",
+    "signin": "เข้าสู่ระบบ",
+    "signup": "สมัครสมาชิก",
+    "signout": "ออกจากระบบ",
+    "placeholderSearch": "ค้นหาสินค้า, หมวดหมู่ หรือแบรนด์ ...",
+    "menuHome": "หน้าหลัก",
+    "menuCatelog": "หมวดหมู่สินค้า",
+    "menuFruit": "ผักและผลไม้",
+    "menuPromotion": "โปรโมชั่น",
+    "menuContact": "ติดต่อเรา",
+    "forgotPassword": "ลืมพาสเวิร์ด?",
+    "menuAdminCatelog": "จัดการสินค้า",
+    "faqs": "คำถามที่พบบ่อย",
+    "menuProfile": "ข้อมูลส่วนตัว",
+    "menuSetting": "ตั้งค่า",
+    "cart": "รถเข็น"
+}
