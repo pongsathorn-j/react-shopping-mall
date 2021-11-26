@@ -19,22 +19,22 @@ const Profile = () => {
           {t("menuProfile")}
         </Typography>
         <Grid container spacing={3}>
-          <Grid item xs={6} md={3} sx={{ textAlign: "right" }}>
+          <Grid item xs={4} md={3} sx={{ textAlign: "right" }}>
             Name:
           </Grid>
-          <Grid item xs={6} md={8}>
+          <Grid item xs={8} md={9}>
             {currentUser.name}
           </Grid>
-          <Grid item xs={6} md={3} sx={{ textAlign: "right" }}>
+          <Grid item xs={4} md={3} sx={{ textAlign: "right" }}>
             Email:
           </Grid>
-          <Grid item xs={6} md={8}>
+          <Grid item xs={8} md={9}>
             {currentUser.email}
           </Grid>
-          <Grid item xs={6} md={3} sx={{ textAlign: "right" }}>
+          <Grid item xs={4} md={3} sx={{ textAlign: "right" }}>
             Role:
           </Grid>
-          <Grid item xs={6} md={8}>
+          <Grid item xs={8} md={9}>
             {currentUser.role}
           </Grid>
         </Grid>

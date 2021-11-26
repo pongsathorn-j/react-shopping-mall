@@ -9,7 +9,12 @@ const Main = ({ children }) => {
 
   return (
     <Box
-      sx={{ flexDirection: "column", justifyContent: "stretch", flexGrow: 1 }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "stretch",
+        flexGrow: 1,
+      }}
       id="back-to-top"
     >
       <Box

@@ -54,11 +54,11 @@ const TopToolbar = styled.div`
       theme.breakpoints.values.md}px) {
     display: flex;
   }
-  
+
   @media screen and (max-width: ${({ theme }) =>
       theme.breakpoints.values.md + 1}px) {
     display: none;
-  };
+  } ;
 `;
 
 const MyButton = styled(Button)`
@@ -118,9 +118,7 @@ const Navbar = () => {
   };
 
   /** Change Theme Mode */
-  const { themeMode, menubarMode } = useSelector(
-    (state) => state.themeReducer
-  );
+  const { themeMode, menubarMode } = useSelector((state) => state.themeReducer);
   const toggleColorMode = () => {
     let mode = themeMode === "light" ? "dark" : "light";
     dispatch(switchThemeMode(mode));
@@ -200,7 +198,7 @@ const Navbar = () => {
 
           <Box sx={{ mx: "24px" }}>
             <Link to="/" color="inherit">
-              <img src="assets/img/logo_1.png" height="50px" alt="logo" />
+              <img src="/assets/img/logo_1.png" height="50px" alt="logo" />
             </Link>
           </Box>
 
@@ -273,25 +271,26 @@ const Navbar = () => {
                     navigate("profile");
                   }}
                 >
-                  <Avatar /> {t('menuProfile')}
+                  <Avatar /> {t("menuProfile")}
                 </MenuItem>
 
                 <Divider />
 
-                <MenuItem onClick={() => {
+                <MenuItem
+                  onClick={() => {
                     navigate("setting");
-                  }}>
+                  }}
+                >
                   <ListItemIcon>
                     <MdSettings fontSize="small" />
                   </ListItemIcon>
-                  {t('menuSetting')}
-                  
+                  {t("menuSetting")}
                 </MenuItem>
                 <MenuItem onClick={handleSignOut}>
                   <ListItemIcon>
                     <MdLogout fontSize="small" />
                   </ListItemIcon>
-                  {t('signout')}
+                  {t("signout")}
                 </MenuItem>
               </Menu>
             </>
@@ -369,6 +368,7 @@ const Navbar = () => {
             </>
           )}
         </Toolbar>
+
         <Toolbar sx={{ mx: "5px", display: { xs: "block", md: "none" } }}>
           <SearchBar />
         </Toolbar>

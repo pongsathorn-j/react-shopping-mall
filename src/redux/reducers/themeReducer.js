@@ -1,7 +1,7 @@
 import { SWITCH_THEME_MODE, SWITCH_MENU_STYLE } from "../action/themeAction";
 
 const initState = {
-  menubarMode: 1,
+  menubarMode: 2,
   themeMode: localStorage.getItem("mode")
     ? localStorage.getItem("mode")
     : "light",

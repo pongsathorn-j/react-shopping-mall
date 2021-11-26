@@ -8,8 +8,9 @@ i18n
   .use(LanguageDetector)
   .use(HttpApi)
   .init({
+    lng: 'th',
     supportedLngs: ["en", "th"],
-    fallbackLng: ["en","th"],
+    fallbackLng: ["en", "th"],
     detection: {
       order: ["localStorage"],
       caches: ["localStorage"],

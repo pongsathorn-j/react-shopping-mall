@@ -40,7 +40,7 @@ function App() {
     <ThemeProvider theme={theme(themeMode)}>
       <Suspense fallback={<Loader />}>
         <Router>
-          <Box sx={{ display: "flex", flexFlow: "row wrap" }}>
+          <Box sx={{ display: "flex", flexDirection: 'column'}}>
             <CssBaseline />
             <Navbar />
             <Main>
@@ -48,7 +48,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="product">
                   <Route path="fruit" element={<Fruit />} />
-                  <Route path="product/:id" element={<ProductDetail />} />
+                  <Route path="detail/:id" element={<ProductDetail />} />
                 </Route>
 
                 <Route path="promotion" element={<Promotion />} />
