@@ -40,7 +40,7 @@ function App() {
     <ThemeProvider theme={theme(themeMode)}>
       <Suspense fallback={<Loader />}>
         <Router>
-          <Box sx={{ display: "flex", flexDirection: 'column'}}>
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
             <CssBaseline />
             <Navbar />
             <Main>
@@ -60,7 +60,7 @@ function App() {
                 <Route
                   path="profile"
                   element={
-                    <RequireAuth >
+                    <RequireAuth>
                       <Profile />
                     </RequireAuth>
                   }
@@ -68,7 +68,7 @@ function App() {
                 <Route
                   path="setting"
                   element={
-                    <RequireAuth >
+                    <RequireAuth>
                       <Setting />
                     </RequireAuth>
                   }

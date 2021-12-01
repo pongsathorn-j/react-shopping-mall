@@ -1,8 +1,8 @@
-import { Breadcrumbs, Container } from "@mui/material";
+import { Container } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+
 import FlashSale from "./product/FlashSale";
 import Recommend from "./product/Recommend";
 import Banner from "./product/Banner";
@@ -12,10 +12,8 @@ const Home = () => {
 
   return (
     <Box>
-      
       <Banner />
       <Container maxWidth="xl">
-        
         <FlashSale />
         <Recommend />
       </Container>

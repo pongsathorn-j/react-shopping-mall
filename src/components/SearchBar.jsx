@@ -1,8 +1,76 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { MdSearch } from "react-icons/md";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "@mui/material";
+import {
+  CircularProgress,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  useTheme,
+} from "@mui/material";
+import useSearch from "../utility/hooks/useSearch";
+
+const SearchBar = () => {
+  const theme = useTheme();
+  const { t } = useTranslation();
+  const [query, setQuery] = useState("");
+  const [searching, setSearching] = useState(false);
+  const { data, isLoading } = useSearch(query);
+
+  const handleSearch = (e) => {
+    const { value } = e.target;
+    setTimeout(() => {
+      if (value) setQuery(value);
+    }, 500);
+    console.log(data);
+  };
+
+  return (
+    <div>
+      <SearchContainer theme={theme}>
+        <IconButton>
+          <MdSearch />
+        </IconButton>
+        <SearchInput
+          onFocus={() => setSearching(true)}
+          onBlur={() => setSearching(false)}
+          placeholder={t("placeholderSearch")}
+          onChange={handleSearch}
+        />
+        {isLoading && <CircularProgress size={24} sx={{ mr: "5px" }} />}
+
+        {data.length > 0 && !isLoading && searching && (
+          <List
+            className="list-item-search"
+            sx={{
+              position: "absolute",
+              top: 48,
+              left: 0,
+              backgroundColor: "#fff",
+              width: "100%",
+              border: "1px solid transparent",
+              color: "#000",
+              overflow: "auto",
+              maxHeight: 300,
+            }}
+          >
+            {data.map((item, i) => {
+              return (
+                <ListItem disablePadding key={item._id}>
+                  <ListItemButton>
+                    <ListItemText primary={`${item.title}`} />
+                  </ListItemButton>
+                </ListItem>
+              );
+            })}
+          </List>
+        )}
+      </SearchContainer>
+    </div>
+  );
+};
 
 const SearchContainer = styled.div`
   position: relative;
@@ -14,9 +82,9 @@ const SearchContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   padding-left: 5px;
-  traslation: all 0.3s ease;
 
-  @media screen and (max-width: ${({theme}) => theme.breakpoints.values.md}px) {
+  @media screen and (max-width: ${({ theme }) =>
+      theme.breakpoints.values.md}px) {
     width: 100%;
   }
 `;
@@ -36,7 +104,8 @@ const SearchInput = styled.input`
     color: #575756;
   }
 
-  &:focus, &:hover {
+  &:focus,
+  &:hover {
     outline: 0;
     border: 1px solid transparent;
     border-bottom: 1px solid #575756;
@@ -52,13 +121,11 @@ const IconButton = styled.button`
   border: none;
   cursor: pointer;
   z-index: 1;
-  backgroud: none;
 
   &:hover {
     color: white;
     &::after {
       opacity: 1;
-      tranform: scale(1);
     }
   }
 
@@ -70,26 +137,9 @@ const IconButton = styled.button`
     height: 100%;
     z-index: -1;
     background: #000;
-    translation: 0.2s ease;
     border-radius: 50%;
-    tranform: scale(0.6);
     opacity: 0;
   }
 `;
-
-const SearchBar = () => {
-  const theme = useTheme();
-  const { t } = useTranslation();
-  return (
-    <div>
-      <SearchContainer theme={theme}>
-        <IconButton>
-          <MdSearch />
-        </IconButton>
-        <SearchInput placeholder={t('placeholderSearch')} />
-      </SearchContainer>
-    </div>
-  );
-};
 
 export default SearchBar;

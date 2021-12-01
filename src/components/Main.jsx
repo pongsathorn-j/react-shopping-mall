@@ -14,6 +14,7 @@ const Main = ({ children }) => {
         flexDirection: "column",
         justifyContent: "stretch",
         flexGrow: 1,
+        width: "100%",
       }}
       id="back-to-top"
     >
@@ -21,9 +22,9 @@ const Main = ({ children }) => {
         component="main"
         sx={{
           bgcolor: "background.paper",
-          mt: breakMdUp ? 13 : 16,
-          mx: 2,
-          p: 2,
+          mt: breakMdUp ? 12 : 15,
+          // mx: 2,
+          // p: 2,
           minHeight: breakMdUp ? "400px" : "300px",
         }}
       >

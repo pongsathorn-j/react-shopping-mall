@@ -4,7 +4,6 @@ import { Container, Box, Typography } from "@mui/material";
 import axios from "axios";
 import Slider from "react-slick";
 import styled from "styled-components";
-import { display } from "@mui/system";
 
 const ArrowWrapper = styled.div`
   .slick-prev:before,
@@ -25,7 +24,6 @@ const ArrowWrapper = styled.div`
   .slick-thumb li {
     height: 40px;
     width: 40px;
-    // display: inline-block;
   }
 
   .slick-thumb {
@@ -45,7 +43,7 @@ const ProductDetail = () => {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get("http://192.168.1.42:3001/shop/");
+      const res = await axios.get(process.env.REACT_APP_API_BASE + "/shop/");
       setDataVal(res.data.data);
     };
     fetchData();
@@ -68,17 +66,17 @@ const ProductDetail = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-      }}
-    >
+    <Box sx={{ display: "block" }}>
       <Container>
-        <Typography variant="subtitle1" gutterBottom component="div">
-          {id}
-        </Typography>
+        {/* <Typography variant="subtitle1" gutterBottom component="div"> */}
+        <h3>{id}sdfdsfdsfdsfdsfdsfdsfhjhgjghjghj</h3>
+        {/* </Typography> */}
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores,
+          et! Corrupti quidem neque, minus sequi fugit iure itaque ipsum
+          repellat. Veniam, quasi numquam aspernatur iure quo hic laboriosam
+          nihil alias.
+        </p>
         {console.log(!!dataVal ? dataVal[0].photo : "error")}
         <ArrowWrapper>
           <Slider {...settings}>

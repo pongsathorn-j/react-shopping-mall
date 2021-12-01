@@ -3,15 +3,6 @@ import { Box, Link } from "@mui/material";
 import Slider from "react-slick";
 import styled from "styled-components";
 
-const SlickWrapper = styled.div`
-.slick-track img {
-  height: calc(60vh);
-  width: 100%;
-  object-fit: cover;
-}
-
-`;
-
 const Banner = () => {
   var settings = {
     dots: true,
@@ -40,18 +31,14 @@ const Banner = () => {
   ];
 
   return (
-    <Box
-    >
+    <Box>
       <SlickWrapper>
         <Slider {...settings}>
           {item.map((items, index) => {
             return (
               <div key={index}>
                 <Link src="#">
-                  <img
-                    src={items.path}
-                    alt={items.title}
-                  />
+                  <img src={items.path} alt={items.title} />
                 </Link>
               </div>
             );
@@ -61,5 +48,14 @@ const Banner = () => {
     </Box>
   );
 };
+
+const SlickWrapper = styled.div`
+  .slick-track img {
+    max-height: 500px;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+`;
 
 export default Banner;
