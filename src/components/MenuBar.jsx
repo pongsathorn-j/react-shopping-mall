@@ -27,9 +27,7 @@ import {
 } from "react-icons/md";
 import { GiFruitBowl } from "react-icons/gi";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  switchThemeMode,
-} from "../redux/action/themeAction";
+import { switchThemeMode } from "../redux/action/themeAction";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 
@@ -67,7 +65,6 @@ const MenuBar = ({ role }) => {
     setLang(newLanguage);
     i18next.changeLanguage(newLanguage);
   };
-
 
   return (
     <Box>
@@ -129,12 +126,12 @@ const MenuBar = ({ role }) => {
           <List component="div" disablePadding>
             <ListItemButton
               sx={{ pl: 4 }}
-              onClick={() => navigate(`product/fruit`)}
+              onClick={() => navigate(`product/list/fruit&vegetable`)}
             >
               <ListItemIcon>
                 <GiFruitBowl />
               </ListItemIcon>
-              <ListItemText primary={t("menuFruit")} />
+              <ListItemText primary={t("fruit&vegetable")} />
             </ListItemButton>
           </List>
         </Collapse>

@@ -7,7 +7,6 @@ const Footer = () => {
       component="footer"
       sx={{
         bgcolor: "background.paper",
-        mx: 2,
         py: 5,
       }}
     >

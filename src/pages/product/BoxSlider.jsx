@@ -6,29 +6,38 @@ import {
   Typography,
   CardActions,
   Box,
-  Link,
   IconButton,
 } from "@mui/material";
 import Slider from "react-slick";
 import styled from "styled-components";
-import { MdShoppingCart } from "react-icons/md";
+import { MdAddShoppingCart } from "react-icons/md";
+import { Link } from "react-router-dom";
+// redux
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../redux/action/cartAction";
 
-const SlickWrapper = styled.div`
-  .slick-prev:before,
-  .slick-next:before {
-    color: #e53935;
-  }
+const BoxSlider = ({ title, product, seeAll }) => {
+  const dispatch = useDispatch();
+  const { cart } = useSelector((state) => state.cartReducer);
 
- 
-`;
-
-const BoxSlider = ({ title, product }) => {
+  const addCart = (p) => {
+    const product = {
+      id: p.id,
+      name: p.title,
+      photo: p.photo,
+      price: p.price,
+      discount: p.discount,
+      quantity: p.quantity,
+      qty: 1,
+    };
+    dispatch(addToCart(product, cart));
+  };
   const settings = {
     dots: true,
     lazyLoad: true,
     infinite: false,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 5,
     slidesToScroll: 1,
     initialSlide: 0,
     responsive: [
@@ -66,44 +75,90 @@ const BoxSlider = ({ title, product }) => {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
+          mb: 2,
         }}
       >
-        <Typography>{title}</Typography>
-        <Link href="/">See All</Link>
+        <Typography variant="h5">{title}</Typography>
+        <Link to={seeAll} title={title}>
+          See All
+        </Link>
       </Box>
       <SlickWrapper>
         <Slider
           {...settings}
           style={{ display: "flex", flexDirection: "column", mx: 1 }}
         >
-          {product.map((items, index) => {
-            return (
-              <Card sx={{ maxWidth: 345 }} key={index}>
-                <CardMedia
-                  component="img"
-                  alt="green iguana"
-                  height="150"
-                  image="/assets/img/not_found.png"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {title}
-                  </Typography>
-                </CardContent>
-                <CardActions
-                  sx={{ display: "flex", justifyContent: "flex-end" }}
-                >
-                  <IconButton>
-                    <MdShoppingCart />
-                  </IconButton>
-                </CardActions>
-              </Card>
-            );
-          })}
+          {!!product &&
+            product.map((items, index) => {
+              return (
+                <Card sx={{ maxWidth: 300 }} key={items._id}>
+                  <Link to={`/product/detail/${items._id}`}>
+                    <CardMedia
+                      component="img"
+                      alt="green iguana"
+                      height="150"
+                      image={items?.photo[0]}
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {items.title}
+                      </Typography>
+                      <Typography
+                        gutterBottom
+                        variant="subtitle"
+                        component="div"
+                        sx={{
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {items.content}
+                      </Typography>
+                    </CardContent>
+                  </Link>
+                  <CardActions
+                    sx={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="div"
+                      sx={{ mx: 1 }}
+                    >
+                      {!!items.discount && items.discount !== 0 ? (
+                        <>
+                          <span style={{ color: "#ff0000" }}>
+                            ฿{items.price - items.discount}
+                          </span>
+                          <small>
+                            <sup>
+                              <del>{items.price}</del>
+                            </sup>
+                          </small>
+                        </>
+                      ) : (
+                        <span>฿{items.price}</span>
+                      )}
+                    </Typography>
+                    <IconButton onClick={() => addCart(items)}>
+                      <MdAddShoppingCart />
+                    </IconButton>
+                  </CardActions>
+                </Card>
+              );
+            })}
         </Slider>
       </SlickWrapper>
     </Box>
   );
 };
+
+const SlickWrapper = styled.div`
+  .slick-prev:before,
+  .slick-next:before {
+    color: #e53935;
+  }
+`;
 
 export default BoxSlider;

@@ -42,37 +42,11 @@ import { signOut, authCheck } from "../redux/action/authAction";
 
 const drawerWidth = 240;
 
-const TopToolbar = styled.div`
-  background-color: #ea605d;
-  color: #fff;
-  justify-content: space-between;
-  padding-left: 10px;
-  padding-right: 10px;
-  max-height: 28px;
-
-  @media screen and (min-width: ${({ theme }) =>
-      theme.breakpoints.values.md}px) {
-    display: flex;
-  }
-
-  @media screen and (max-width: ${({ theme }) =>
-      theme.breakpoints.values.md + 1}px) {
-    display: none;
-  } ;
-`;
-
-const MyButton = styled(Button)`
-  overflow: hidden;
-  white-space: nowrap;
-  display: block;
-  text-overflow: ellipsis;
-  text-transform: none;
-`;
-
 const Navbar = () => {
   const theme = useTheme();
   const breakMdUp = useMediaQuery(theme.breakpoints.up("md"));
   const navigate = useNavigate();
+  const { total } = useSelector((state) => state.cartReducer);
 
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -215,7 +189,7 @@ const Navbar = () => {
             color="inherit"
             onClick={() => navigate(`cart`)}
           >
-            <Badge badgeContent={4} color="secondary">
+            <Badge badgeContent={total} color="secondary">
               <MdShoppingCart />
             </Badge>
           </IconButton>
@@ -462,5 +436,32 @@ const Navbar = () => {
     </>
   );
 };
+
+const TopToolbar = styled.div`
+  background-color: #ea605d;
+  color: #fff;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+  max-height: 28px;
+
+  @media screen and (min-width: ${({ theme }) =>
+      theme.breakpoints.values.md}px) {
+    display: flex;
+  }
+
+  @media screen and (max-width: ${({ theme }) =>
+      theme.breakpoints.values.md + 1}px) {
+    display: none;
+  } ;
+`;
+
+const MyButton = styled(Button)`
+  overflow: hidden;
+  white-space: nowrap;
+  display: block;
+  text-overflow: ellipsis;
+  text-transform: none;
+`;
 
 export default Navbar;

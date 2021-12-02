@@ -25,8 +25,8 @@ const Banner = () => {
       path: "https://via.placeholder.com/1800x400/FFFFFF/000000/?text=Banner+1800x400",
     },
     {
-      title: "black firday",
-      path: "https://place-hold.it/1800x400/666/fff.png/000",
+      title: "Banner",
+      path: "https://via.placeholder.com/1800x400/D3D3D3/FFFFFF/?text=Banner+1800x400",
     },
   ];
 

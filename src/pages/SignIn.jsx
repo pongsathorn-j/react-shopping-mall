@@ -109,7 +109,7 @@ const SignIn = () => {
               ),
             }}
           />
-          
+
           <Button
             type="submit"
             fullWidth
@@ -120,9 +120,9 @@ const SignIn = () => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link to="../signin" variant="body2">
+              {/* <Link to="../signin" variant="body2">
                 {t("forgotPassword")}
-              </Link>
+              </Link> */}
             </Grid>
             <Grid item>
               <Link to="../signup">{t("signup")}</Link>

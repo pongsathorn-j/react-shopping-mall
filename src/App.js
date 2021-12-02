@@ -15,7 +15,7 @@ import RequireAuth from "./guard/RequireAuth";
 /** Code Splitting */
 const Home = React.lazy(() => import("./pages/Home"));
 const SignIn = React.lazy(() => import("./pages/SignIn"));
-const Fruit = React.lazy(() => import("./pages/product/Fruit"));
+
 const ProductDetail = React.lazy(() => import("./pages/product/ProductDetail"));
 const SignUp = React.lazy(() => import("./pages/SignUp"));
 const Promotion = React.lazy(() => import("./pages/Promotion"));
@@ -25,6 +25,7 @@ const Cart = React.lazy(() => import("./pages/Cart"));
 const Faqs = React.lazy(() => import("./pages/Faqs"));
 const Profile = React.lazy(() => import("./pages/Profile"));
 const Setting = React.lazy(() => import("./pages/Setting"));
+const ProductList = React.lazy(() => import("./pages/product/ProductList"));
 
 const CreateProduct = React.lazy(() =>
   import("./pages/admin/product/CreateProduct")
@@ -47,7 +48,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="product">
-                  <Route path="fruit" element={<Fruit />} />
+                  <Route path="list/:itemtype" element={<ProductList />} />
                   <Route path="detail/:id" element={<ProductDetail />} />
                 </Route>
 

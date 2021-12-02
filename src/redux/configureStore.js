@@ -20,9 +20,8 @@ const persistConfig = {
       },
     }),
   ],
-  whitelist: ['authReducer', 'themeReducer']
+  // whitelist: ['authReducer', 'themeReducer']
 };
-
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

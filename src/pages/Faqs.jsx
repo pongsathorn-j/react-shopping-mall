@@ -8,7 +8,7 @@ const Faqs = () => {
 
   return (
     <Box>
-      <Breadcrumbs aria-label="breadcrumb" sx={{ pl: 2, mb: 1 }}>
+      <Breadcrumbs aria-label="breadcrumb" sx={{ pl: 2, my: 1 }}>
         <Link underline="hover" color="inherit" to="/">
           {t("menuHome")}
         </Link>

@@ -1,41 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Container, Box, Typography } from "@mui/material";
+import { Container, Box } from "@mui/material";
 import axios from "axios";
 import Slider from "react-slick";
 import styled from "styled-components";
-
-const ArrowWrapper = styled.div`
-  .slick-prev:before,
-  .slick-next:before {
-    color: #e53935;
-  }
-
-  .slick-slide img {
-    height: 400px;
-    width: 100%;
-    object-fit: cover;
-  }
-
-  .slick-dots {
-    position: static;
-  }
-
-  .slick-thumb li {
-    height: 40px;
-    width: 40px;
-  }
-
-  .slick-thumb {
-    margin-bottom: 2 rem;
-  }
-
-  .slick-thumb li a img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-  }
-`;
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -94,5 +62,37 @@ const ProductDetail = () => {
     </Box>
   );
 };
+
+const ArrowWrapper = styled.div`
+  .slick-prev:before,
+  .slick-next:before {
+    color: #e53935;
+  }
+
+  .slick-slide img {
+    height: 400px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .slick-dots {
+    position: static;
+  }
+
+  .slick-thumb li {
+    height: 40px;
+    width: 40px;
+  }
+
+  .slick-thumb {
+    margin-bottom: 2 rem;
+  }
+
+  .slick-thumb li a img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+`;
 
 export default ProductDetail;

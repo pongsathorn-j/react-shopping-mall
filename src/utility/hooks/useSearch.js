@@ -11,24 +11,24 @@ function useSearch(query) {
   };
 
   useEffect(() => {
-    function fetchData() {
-      setData([]);
+    const fetchData = async () => {
       let cancel;
-      axios({
-        method: "GET",
-        url: process.env.REACT_APP_API_BASE + "/product/search/" + query,
-        cancelToken: new axios.CancelToken((c) => (cancel = c)),
-      })
-        .then((res) => {
-          setIsLoading(false);
-          setData(res.data.data);
-        })
-        .catch((e) => {
-          resetState();
-          if (axios.isCancel(e)) return;
+      try {
+        setData([]);
+
+        const res = await axios({
+          method: "GET",
+          url: process.env.REACT_APP_API_BASE + "/product/search/" + query,
+          cancelToken: new axios.CancelToken((c) => (cancel = c)),
         });
+        setIsLoading(false);
+        setData(res.data.data);
+      } catch (e) {
+        resetState();
+        if (axios.isCancel(e)) return;
+      }
       return () => cancel();
-    }
+    };
     if (!query || query.length < 3) return resetState();
     setIsLoading(true);
     const timeOutId = setTimeout(() => fetchData(query), 500);

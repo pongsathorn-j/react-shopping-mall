@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { MdSearch } from "react-icons/md";
 import { useTranslation } from "react-i18next";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
 import {
   CircularProgress,
   List,
@@ -11,10 +12,12 @@ import {
   useTheme,
 } from "@mui/material";
 import useSearch from "../utility/hooks/useSearch";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
   const theme = useTheme();
   const { t } = useTranslation();
+  const navigator = useNavigate();
   const [query, setQuery] = useState("");
   const [searching, setSearching] = useState(false);
   const { data, isLoading } = useSearch(query);
@@ -24,50 +27,69 @@ const SearchBar = () => {
     setTimeout(() => {
       if (value) setQuery(value);
     }, 500);
-    console.log(data);
+  };
+
+  const handleClickAway = () => {
+    setSearching(false);
+  };
+
+  const handleSearchList = (id) => {
+    navigator(`/product/detail/${id}`);
+    setSearching(false);
   };
 
   return (
     <div>
-      <SearchContainer theme={theme}>
-        <IconButton>
-          <MdSearch />
-        </IconButton>
-        <SearchInput
-          onFocus={() => setSearching(true)}
-          onBlur={() => setSearching(false)}
-          placeholder={t("placeholderSearch")}
-          onChange={handleSearch}
-        />
-        {isLoading && <CircularProgress size={24} sx={{ mr: "5px" }} />}
+      <ClickAwayListener
+        onClickAway={handleClickAway}
+        mouseEvent="onMouseDown"
+        touchEvent="onTouchStart"
+      >
+        <SearchContainer theme={theme}>
+          <IconButton>
+            <MdSearch />
+          </IconButton>
+          <SearchInput
+            onFocus={() => setSearching(true)}
+            placeholder={t("placeholderSearch")}
+            onChange={handleSearch}
+          />
+          {isLoading && <CircularProgress size={24} sx={{ mr: "5px" }} />}
 
-        {data.length > 0 && !isLoading && searching && (
-          <List
-            className="list-item-search"
-            sx={{
-              position: "absolute",
-              top: 48,
-              left: 0,
-              backgroundColor: "#fff",
-              width: "100%",
-              border: "1px solid transparent",
-              color: "#000",
-              overflow: "auto",
-              maxHeight: 300,
-            }}
-          >
-            {data.map((item, i) => {
-              return (
-                <ListItem disablePadding key={item._id}>
-                  <ListItemButton>
-                    <ListItemText primary={`${item.title}`} />
-                  </ListItemButton>
-                </ListItem>
-              );
-            })}
-          </List>
-        )}
-      </SearchContainer>
+          {data.length > 0 && !isLoading && searching && (
+            <List
+              className="list-item-search"
+              sx={{
+                position: "absolute",
+                top: 48,
+                left: 0,
+                backgroundColor: "#fff",
+                width: "100%",
+                border: "1px solid transparent",
+                color: "#000",
+                overflow: "auto",
+                maxHeight: 300,
+              }}
+            >
+              {data.map((item, i) => {
+                return (
+                  <ListItem
+                    disablePadding
+                    key={item._id}
+                    onClick={() => {
+                      handleSearchList(item._id);
+                    }}
+                  >
+                    <ListItemButton>
+                      <ListItemText primary={`${item.title}`} />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
+            </List>
+          )}
+        </SearchContainer>
+      </ClickAwayListener>
     </div>
   );
 };

@@ -2,6 +2,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## App Demo 
+[Link WebSite Demo](https://shopping-mall-project.netlify.app).
+
+## Backend code 
+[Link Backend](https://github.com/pongsathorn-j/online_node_api).
+
 ## Available Scripts
 
 In the project directory, you can run:
