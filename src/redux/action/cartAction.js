@@ -6,7 +6,7 @@ export const addToCart = (product = {}, cart = []) => {
   let exists = false;
   if (cart.length > 0) {
     for (const c of cart) {
-      if (c.id === product.id) {
+      if (c._id === product._id) {
         c.qty++;
         exists = true;
       }
@@ -39,7 +39,7 @@ export const removeToCart = (product = {}, cart = []) => {
   if (cart.length > 0) {
     let index = 0;
     for (const c of cart) {
-      if (c.id === product.id) {
+      if (c._id === product._id) {
         c.qty--;
         if (c.qty <= 0) {
           cart.splice(index, 1);

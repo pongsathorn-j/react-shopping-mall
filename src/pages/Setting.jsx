@@ -10,18 +10,12 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { switchMenubarStyle } from "../redux/action/themeAction";
 import { useTranslation } from "react-i18next";
 
 const Setting = () => {
   const { menubarMode } = useSelector((state) => state.themeReducer);
-  const dispatch = useDispatch();
-  const { t } = useTranslation();
 
-  const handleMenubarMode = (event) => {
-    let mode = event.target.checked ? 1 : 2;
-    dispatch(switchMenubarStyle(mode));
-  };
+  const { t } = useTranslation();
 
   return (
     <Box>
@@ -35,21 +29,9 @@ const Setting = () => {
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={8} md={4}>
-            Menu Style (for large screen)
+            {/* Menu Style (for large screen) */}
           </Grid>
-          <Grid item xs={4} md={4}>
-            <FormControlLabel
-              control={
-                <Switch
-                  color="primary"
-                  onChange={handleMenubarMode}
-                  defaultChecked={menubarMode === 1}
-                />
-              }
-              label={menubarMode === 1 ? "show" : "hide"}
-              labelPlacement="end"
-            />
-          </Grid>
+          <Grid item xs={4} md={4}></Grid>
         </Grid>
       </Container>
     </Box>

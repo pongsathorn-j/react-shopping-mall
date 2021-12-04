@@ -5,6 +5,7 @@ import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "./components/Loader";
+import GlobalStyle from "./styles/globalStyle";
 
 import theme from "./styles/theme";
 
@@ -39,6 +40,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme(themeMode)}>
+      <GlobalStyle />
       <Suspense fallback={<Loader />}>
         <Router>
           <Box sx={{ display: "flex", flexDirection: "column" }}>

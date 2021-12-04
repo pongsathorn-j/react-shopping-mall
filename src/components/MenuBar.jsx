@@ -24,8 +24,11 @@ import {
   MdLocalOffer,
   MdHome,
   MdForum,
+  MdLiquor,
+  MdBlender,
 } from "react-icons/md";
-import { GiFruitBowl } from "react-icons/gi";
+import { GiFruitBowl, GiShrimp } from "react-icons/gi";
+
 import { useSelector, useDispatch } from "react-redux";
 import { switchThemeMode } from "../redux/action/themeAction";
 import i18next from "i18next";
@@ -52,7 +55,7 @@ const MenuBar = ({ role }) => {
     setOpenSubMenu(!openSubMenu);
   };
   /** Change Theme Mode */
-  const { themeMode, menubarMode } = useSelector((state) => state.themeReducer);
+  const { themeMode } = useSelector((state) => state.themeReducer);
   const toggleColorMode = () => {
     const mode = themeMode === "light" ? "dark" : "light";
     dispatch(switchThemeMode(mode));
@@ -68,8 +71,6 @@ const MenuBar = ({ role }) => {
 
   return (
     <Box>
-      {menubarMode === 1 && <Spacer />}
-
       <Toolbar>
         <ToggleButtonGroup
           color="standard"
@@ -126,12 +127,56 @@ const MenuBar = ({ role }) => {
           <List component="div" disablePadding>
             <ListItemButton
               sx={{ pl: 4 }}
-              onClick={() => navigate(`product/list/fruit&vegetable`)}
+              onClick={() => navigate(`product/list/beverages`)}
             >
               <ListItemIcon>
                 <GiFruitBowl />
               </ListItemIcon>
+              <ListItemText primary={t("beverages")} />
+            </ListItemButton>
+          </List>
+          <List component="div" disablePadding>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              onClick={() => navigate(`product/list/fruit&vegetable`)}
+            >
+              <ListItemIcon>
+                <MdLiquor />
+              </ListItemIcon>
               <ListItemText primary={t("fruit&vegetable")} />
+            </ListItemButton>
+          </List>
+          <List component="div" disablePadding>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              onClick={() => navigate(`product/list/meat&seafood`)}
+            >
+              <ListItemIcon>
+                <GiShrimp />
+              </ListItemIcon>
+              <ListItemText primary={t("meat&seafood")} />
+            </ListItemButton>
+          </List>
+          <List component="div" disablePadding>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              onClick={() => navigate(`product/list/homeAppliance`)}
+            >
+              <ListItemIcon>
+                <MdBlender />
+              </ListItemIcon>
+              <ListItemText primary={t("homeAppliance")} />
+            </ListItemButton>
+          </List>
+          <List component="div" disablePadding>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              onClick={() => navigate(`product/list/fashion`)}
+            >
+              <ListItemIcon>
+                <GiFruitBowl />
+              </ListItemIcon>
+              <ListItemText primary={t("fashion")} />
             </ListItemButton>
           </List>
         </Collapse>

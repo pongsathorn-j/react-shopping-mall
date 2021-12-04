@@ -14,5 +14,22 @@
     "faqs": "คำถามที่พบบ่อย",
     "menuProfile": "ข้อมูลส่วนตัว",
     "menuSetting": "ตั้งค่า",
-    "cart": "รถเข็น"
+    "cart": "รถเข็น",
+    "beverages":"เครื่องดืม",
+    "homeAppliance":"เครื่องใช้ไฟฟ้า",
+    "fashion":"แฟชั่น",
+    "meat&seafood":"เนื้อสัตว์ และอาหารทะเล",
+    "addcart": "หยิบใส่รถเข็น",
+    "productDetail":"รายละเอียดสินค้า",
+    "checkout":"จ่ายเงิน",
+    "discount": "ส่วนลด",
+    "total": "รวม",
+    "totalprice": "ราคา",
+    "included": "รวมสินค้า",
+    "item":"ชิ้น",
+    "orderSum": "สรุปการสั่งซื้อ",
+    "review": "รีวิวสินค้า",
+    "sameCategory": "สินค้าหมวดหมู่เดียวกัน",
+    "noReview": "สินค้านี้ยังไม่มีผู้รีวิว"
+
 }

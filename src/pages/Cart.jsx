@@ -34,7 +34,7 @@ const Cart = () => {
 
   const addCart = (p) => {
     const product = {
-      id: p.id,
+      _id: p._id,
       name: p.title,
       photo: p.photo,
       price: p.price,
@@ -47,7 +47,7 @@ const Cart = () => {
 
   const removeCart = (p) => {
     const product = {
-      id: p.id,
+      _id: p._id,
       name: p.title,
       photo: p.photo,
       price: p.price,
@@ -88,15 +88,16 @@ const Cart = () => {
               {total > 0 ? (
                 cart.map((items, index) => {
                   return (
-                    <div key={items.id}>
+                    <div key={items._id}>
                       <ListItem>
                         <ListItemAvatar>
                           <Avatar alt={items.name} src={items.photo[0]} />
                         </ListItemAvatar>
 
                         <ListItemText
+                          sx={{ width: "50%" }}
                           primary={
-                            <Link to={`/product/detail/${items.id}`}>
+                            <Link to={`/product/detail/${items._id}`}>
                               {items.name}
                             </Link>
                           }
@@ -108,7 +109,7 @@ const Cart = () => {
                               <IconButton onClick={() => removeCart(items)}>
                                 <MdOutlineRemove size="20" />
                               </IconButton>
-                              {items.qty} ชิ้น
+                              {items.qty} {t("item")}
                               <IconButton onClick={() => addCart(items)}>
                                 <MdOutlineAdd size="20" />
                               </IconButton>
@@ -151,24 +152,49 @@ const Cart = () => {
               <Box>
                 <Card>
                   <CardContent>
-                    <Typography variant="h3" gutterBottom>
-                      Total
+                    <Typography
+                      variant="h5"
+                      gutterBottom
+                      sx={{ textAlign: "center" }}
+                    >
+                      {t("orderSum")}
                     </Typography>
+                    <Divider />
                     <Typography
                       variant="body2"
                       color="text.secondary"
                       component="div"
+                      sx={{ pt: "1em" }}
                     >
-                      คำสั่งซื้อทั้งหมด {total} ชิ้น
+                      {t("included")} {total} {t("item")}
                     </Typography>
-                    <Typography sx={{ my: 1 }}>
-                      รวมการสั่งซื้อ {priceAll}
+                    <Typography
+                      sx={{
+                        my: 1,
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <span>{t("totalprice")}</span>
+                      <span>฿{priceAll}</span>
                     </Typography>
-                    <Typography variant="body2" color="secondary">
-                      ส่วนลดทั้งหมด {discountAll}
+                    <Typography
+                      variant="body2"
+                      color="secondary"
+                      sx={{ display: "flex", justifyContent: "space-between" }}
+                    >
+                      <span>{t("discount")}</span> <span>-฿{discountAll}</span>
                     </Typography>
-                    <Typography variant="h5" sx={{ my: 1 }}>
-                      รวม {priceAll - discountAll}
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        my: 1,
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <span>{t("total")} </span>
+                      <span>฿{priceAll - discountAll}</span>
                     </Typography>
                   </CardContent>
                   <CardActions sx={{}}>
@@ -178,7 +204,7 @@ const Cart = () => {
                       fullWidth
                       onClick={handleCheckOut}
                     >
-                      Check Out
+                      {t("checkout")}
                     </Button>
                   </CardActions>
                 </Card>

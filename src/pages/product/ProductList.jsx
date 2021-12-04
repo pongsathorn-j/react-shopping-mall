@@ -20,6 +20,7 @@ import Loader from "../../components/Loader";
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../../redux/action/cartAction";
+import { TagSale } from "../../styles/myStyle";
 
 const ProductList = () => {
   const { itemtype } = useParams();
@@ -34,7 +35,7 @@ const ProductList = () => {
 
   const addCart = (p) => {
     const product = {
-      id: p.id,
+      _id: p._id,
       name: p.title,
       photo: p.photo,
       price: p.price,
@@ -49,6 +50,7 @@ const ProductList = () => {
     setLoading(true);
     const getData = async () => {
       setItemData([]);
+      setError(null);
       try {
         let url = "";
         if (itemtype === "flash") {
@@ -56,7 +58,7 @@ const ProductList = () => {
             process.env.REACT_APP_API_BASE +
             "/product/discount/" +
             pagination +
-            "/20/40";
+            "/20/100";
         } else if (itemtype === "recommend") {
           url = process.env.REACT_APP_API_BASE + "/product/page/" + pagination;
         } else {
@@ -132,29 +134,56 @@ const ProductList = () => {
             itemData.data.map((items, index) => {
               return (
                 <Grid item xs={6} sm={4} md={3} key={items._id}>
-                  <Card sx={{ maxWidth: 300 }}>
-                    <Link to={`/product/detail/${items._id}`}>
+                  <Card
+                    sx={{
+                      maxWidth: 280,
+                    }}
+                    key={items._id}
+                  >
+                    <Link
+                      to={`/product/detail/${items._id}`}
+                      style={{ textDecorationLine: "none" }}
+                    >
                       <CardMedia
-                        component="img"
-                        alt="green iguana"
-                        height="150"
-                        image={items?.photo[0]}
-                      />
+                        component="div"
+                        style={{
+                          maxWidth: 280,
+                          padding: "5px",
+                          backgroundColor: "#fff",
+                          position: "relative",
+                        }}
+                      >
+                        {items.discount_percentage > 0 && (
+                          <TagSale style={{ color: "#fff" }}>
+                            -{Math.ceil(items.discount_percentage)}%
+                          </TagSale>
+                        )}
+                        <CardMedia
+                          component="img"
+                          alt="green iguana"
+                          image={items?.photo[0]}
+                          style={{
+                            maxHeight: "180px",
+                            width: "auto",
+                            // maxWidth: 250,
+                            margin: "0 auto",
+                            objectFit: "cover",
+                          }}
+                        />
+                      </CardMedia>
                       <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          {items.title}
-                        </Typography>
                         <Typography
                           gutterBottom
-                          variant="subtitle"
+                          variant="subtitle2"
                           component="div"
                           sx={{
-                            whiteSpace: "nowrap",
+                            lineHeight: "1.5em",
+                            height: "3em",
                             overflow: "hidden",
-                            textOverflow: "ellipsis",
+                            color: "text.primary",
                           }}
                         >
-                          {items.content}
+                          {items.title}
                         </Typography>
                       </CardContent>
                     </Link>
@@ -162,6 +191,7 @@ const ProductList = () => {
                       sx={{
                         display: "flex",
                         justifyContent: "space-between",
+                        // height: "2vw",
                       }}
                     >
                       <Typography
@@ -182,7 +212,7 @@ const ProductList = () => {
                             </small>
                           </>
                         ) : (
-                          items.price
+                          <span>฿{items.price}</span>
                         )}
                       </Typography>
                       <IconButton onClick={() => addCart(items)}>

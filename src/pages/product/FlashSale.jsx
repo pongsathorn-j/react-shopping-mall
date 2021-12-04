@@ -15,7 +15,7 @@ const FlashSale = () => {
       setFlashDeal([]);
       try {
         const res = await axios.get(
-          process.env.REACT_APP_API_BASE + "/product/discount/1/20/40"
+          process.env.REACT_APP_API_BASE + "/product/discount/1/20/100"
         );
         setFlashDeal(res.data.data);
         setLoading(false);

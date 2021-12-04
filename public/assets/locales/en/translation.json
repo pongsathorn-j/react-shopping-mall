@@ -14,5 +14,21 @@
     "faqs": "FAQs",
     "menuProfile": "Profile",
     "menuSetting": "Settings",
-    "cart": "Cart"
+    "cart": "Cart",
+    "beverages":"Beverages",
+    "homeAppliance":"Home Appliance",
+    "fashion":"Fashion",
+    "meat&seafood":"Meat & Seafood",
+    "addcart": "Add To Cart",
+    "productDetail": "Description",
+    "checkout":"Check Out",
+    "discount": "Discount",
+    "total": "Total",
+    "totalprice": "Price",
+    "included": "Included",
+    "item":"Item(s)",
+    "orderSum": "Order Summary",
+    "review": "Product Reviews",
+    "sameCategory": "Product Same Category",
+    "noReview": "This product has no reviews."
 }

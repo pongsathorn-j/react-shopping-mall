@@ -92,7 +92,7 @@ const Navbar = () => {
   };
 
   /** Change Theme Mode */
-  const { themeMode, menubarMode } = useSelector((state) => state.themeReducer);
+  const { themeMode } = useSelector((state) => state.themeReducer);
   const toggleColorMode = () => {
     let mode = themeMode === "light" ? "dark" : "light";
     dispatch(switchThemeMode(mode));
@@ -113,12 +113,7 @@ const Navbar = () => {
       <AppBar
         position="fixed"
         sx={{
-          zIndex: (theme) =>
-            menubarMode === 1
-              ? breakMdUp
-                ? theme.zIndex.drawer + 1
-                : theme.zIndex.drawer - 2
-              : theme.zIndex.drawer - 2,
+          zIndex: (theme) => theme.zIndex.drawer - 2,
         }}
       >
         <TopToolbar theme={theme}>
@@ -162,7 +157,7 @@ const Navbar = () => {
             onClick={handleDrawerToggle}
             sx={{
               mr: 2,
-              display: { md: menubarMode === 1 ? "none" : "block" },
+              display: { md: "block" },
             }}
           >
             <MdMenu />
@@ -348,91 +343,38 @@ const Navbar = () => {
         </Toolbar>
       </AppBar>
 
-      {menubarMode === 1 ? (
-        <Box
-          component="nav"
-          sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
+      <Box component="nav" sx={{}}>
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerClose}
+          onBackdropClick={handleDrawerClose}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: "block", md: "block" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
+          }}
         >
-          {/* Default Drawer Small Screen * < md * */}
-          <Drawer
-            variant="temporary"
-            open={mobileOpen}
-            onClose={handleDrawerClose}
-            onBackdropClick={handleDrawerClose}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
+          <Box
             sx={{
-              display: { xs: "block", md: "none" },
-              "& .MuiDrawer-paper": {
-                boxSizing: "border-box",
-                width: drawerWidth,
-              },
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-end",
+              mt: 1,
             }}
           >
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "flex-end",
-                mt: 1,
-              }}
-            >
-              <IconButton onClick={handleDrawerClose}>
-                <MdCancel />
-              </IconButton>
-            </Box>
-            <MenuBar role={currentUser?.role} />
-          </Drawer>
-          {/* Default Drawer large Screen * > md * */}
-          <Drawer
-            variant="permanent"
-            sx={{
-              display: { xs: "none", sm: "none", md: "block" },
-              "& .MuiDrawer-paper": {
-                boxSizing: "border-box",
-                width: drawerWidth,
-              },
-            }}
-            open
-          >
-            <MenuBar role={currentUser?.role} />
-          </Drawer>
-        </Box>
-      ) : (
-        <Box component="nav" sx={{}}>
-          <Drawer
-            variant="temporary"
-            open={mobileOpen}
-            onClose={handleDrawerClose}
-            onBackdropClick={handleDrawerClose}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-            sx={{
-              display: { xs: "block", md: "block" },
-              "& .MuiDrawer-paper": {
-                boxSizing: "border-box",
-                width: drawerWidth,
-              },
-            }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "flex-end",
-                mt: 1,
-              }}
-            >
-              <IconButton onClick={handleDrawerClose}>
-                <MdCancel />
-              </IconButton>
-            </Box>
-            <MenuBar role={currentUser?.role} />
-          </Drawer>
-        </Box>
-      )}
+            <IconButton onClick={handleDrawerClose}>
+              <MdCancel />
+            </IconButton>
+          </Box>
+          <MenuBar role={currentUser?.role} />
+        </Drawer>
+      </Box>
     </>
   );
 };

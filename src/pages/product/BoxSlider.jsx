@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/action/cartAction";
+import { TagSale } from "../../styles/myStyle";
 
 const BoxSlider = ({ title, product, seeAll }) => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const BoxSlider = ({ title, product, seeAll }) => {
 
   const addCart = (p) => {
     const product = {
-      id: p.id,
+      _id: p._id,
       name: p.title,
       photo: p.photo,
       price: p.price,
@@ -38,11 +39,20 @@ const BoxSlider = ({ title, product, seeAll }) => {
     infinite: false,
     speed: 500,
     slidesToShow: 5,
-    slidesToScroll: 1,
+    slidesToScroll: 5,
     initialSlide: 0,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1400,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          infinite: false,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 1100,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
@@ -51,7 +61,7 @@ const BoxSlider = ({ title, product, seeAll }) => {
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 720,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -91,34 +101,63 @@ const BoxSlider = ({ title, product, seeAll }) => {
           {!!product &&
             product.map((items, index) => {
               return (
-                <Card sx={{ maxWidth: 300 }} key={items._id}>
+                <Card
+                  sx={{
+                    maxWidth: 280,
+                  }}
+                  key={items._id}
+                >
                   <Link to={`/product/detail/${items._id}`}>
                     <CardMedia
-                      component="img"
-                      alt="green iguana"
-                      height="150"
-                      image={items?.photo[0]}
-                    />
+                      component="div"
+                      style={{
+                        maxWidth: 280,
+                        padding: "5px",
+                        backgroundColor: "#fff",
+                        position: "relative",
+                      }}
+                    >
+                      {items.discount_percentage > 0 && (
+                        <TagSale style={{ color: "#fff" }}>
+                          -{Math.ceil(items.discount_percentage)}%
+                        </TagSale>
+                      )}
+
+                      <CardMedia
+                        component="img"
+                        alt="green iguana"
+                        image={items?.photo[0]}
+                        style={{
+                          maxHeight: "180px",
+                          width: "auto",
+                          // maxWidth: 250,
+                          margin: "0 auto",
+                          objectFit: "cover",
+                        }}
+                      />
+                    </CardMedia>
                     <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        {items.title}
-                      </Typography>
                       <Typography
                         gutterBottom
-                        variant="subtitle"
+                        variant="subtitle2"
                         component="div"
                         sx={{
-                          whiteSpace: "nowrap",
+                          lineHeight: "1.5em",
+                          height: "3em",
                           overflow: "hidden",
-                          textOverflow: "ellipsis",
+                          color: "text.primary",
                         }}
                       >
-                        {items.content}
+                        {items.title}
                       </Typography>
                     </CardContent>
                   </Link>
                   <CardActions
-                    sx={{ display: "flex", justifyContent: "space-between" }}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      // height: "2vw",
+                    }}
                   >
                     <Typography
                       gutterBottom

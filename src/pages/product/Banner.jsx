@@ -17,16 +17,26 @@ const Banner = () => {
 
   const item = [
     {
-      title: "Banner",
-      path: "https://via.placeholder.com/1800x400/000000/FFFFFF/?text=Banner+1800x400",
+      title: "Banner5",
+      path: "/assets/img/banner/banner5.png",
     },
     {
-      title: "Banner",
-      path: "https://via.placeholder.com/1800x400/FFFFFF/000000/?text=Banner+1800x400",
+      title: "Banner1",
+      path: "/assets/img/banner/banner1.jpg",
     },
+    // {
+    //   title: "Banner3",
+    //   path: "/assets/img/banner/banner3.jpg",
+    // },
+
     {
-      title: "Banner",
-      path: "https://via.placeholder.com/1800x400/D3D3D3/FFFFFF/?text=Banner+1800x400",
+      title: "Banner4",
+      path: "/assets/img/banner/banner4.jpg",
+    },
+
+    {
+      title: "Banner6",
+      path: "/assets/img/banner/banner6.jpg",
     },
   ];
 
@@ -52,7 +62,6 @@ const Banner = () => {
 const SlickWrapper = styled.div`
   .slick-track img {
     max-height: 500px;
-    height: 100%;
     width: 100%;
     object-fit: cover;
   }
