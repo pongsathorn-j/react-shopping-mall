@@ -95,7 +95,7 @@ const Cart = () => {
                         </ListItemAvatar>
 
                         <ListItemText
-                          sx={{ width: "50%" }}
+                          sx={{ width: "45%" }}
                           primary={
                             <Link to={`/product/detail/${items._id}`}>
                               {items.name}
@@ -104,6 +104,7 @@ const Cart = () => {
                         />
 
                         <ListItemText
+                          sx={{ whiteSpace: "nowrap" }}
                           primary={
                             <>
                               <IconButton onClick={() => removeCart(items)}>

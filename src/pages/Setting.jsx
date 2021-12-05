@@ -1,20 +1,9 @@
 import React from "react";
-import {
-  Breadcrumbs,
-  Container,
-  FormControlLabel,
-  Grid,
-  Switch,
-  Typography,
-  Box,
-} from "@mui/material";
+import { Breadcrumbs, Container, Grid, Typography, Box } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 const Setting = () => {
-  const { menubarMode } = useSelector((state) => state.themeReducer);
-
   const { t } = useTranslation();
 
   return (

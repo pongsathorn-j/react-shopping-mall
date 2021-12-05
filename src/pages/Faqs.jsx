@@ -16,10 +16,43 @@ const Faqs = () => {
         <Typography color="text.primary">{t("faqs")}</Typography>
       </Breadcrumbs>
 
-      <Container>
+      <Container maxWidth="xl" sx={{ my: 2 }}>
         <Typography component="h1" variant="h5" sx={{ mb: 1 }}>
           {t("faqs")}
         </Typography>
+        <Box component="section" sx={{ ml: 1, my: 2 }}>
+          <Typography variant="subtitle2" gutterBottom>
+            Q: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod,
+            provident!
+          </Typography>
+          <Typography variant="body2">
+            <b>A: </b>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Molestias rerum maiores libero reiciendis provident tempore
+            perspiciatis alias nulla quo nemo incidunt inventore, ratione eius
+            tenetur odio quam dolores magnam! Nulla?
+          </Typography>
+        </Box>
+        <Box component="section" sx={{ ml: 1, my: 2 }}>
+          <Typography variant="subtitle2" gutterBottom>
+            Q: Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
+            nesciunt maiores at vel id?
+          </Typography>
+          <Typography variant="body2">
+            <b>A: </b>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Quas, id animi quae perspiciatis unde expedita beatae cumque
+            dignissimos nesciunt nihil!
+          </Typography>
+        </Box>
+        <Box component="section" sx={{ ml: 1, my: 2 }}>
+          <Typography variant="subtitle2" gutterBottom>
+            Q: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et
+            fugit at quos.
+          </Typography>
+          <Typography variant="body2">
+            <b>A: </b>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Quaerat aliquid error molestias minus nam sequi debitis adipisci!
+          </Typography>
+        </Box>
       </Container>
     </Box>
   );

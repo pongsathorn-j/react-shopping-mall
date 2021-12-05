@@ -30,5 +30,6 @@
     "orderSum": "Order Summary",
     "review": "Product Reviews",
     "sameCategory": "Product Same Category",
-    "noReview": "This product has no reviews."
+    "noReview": "This product has no reviews.",
+    "save": "Save"
 }

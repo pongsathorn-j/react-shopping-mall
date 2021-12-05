@@ -1,4 +1,4 @@
-import { SWITCH_THEME_MODE, SWITCH_MENU_STYLE } from "../action/themeAction";
+import { SWITCH_THEME_MODE } from "../action/themeAction";
 
 const initState = {
   themeMode: localStorage.getItem("mode")

@@ -14,7 +14,6 @@ import {
   ListSubheader,
   Box,
 } from "@mui/material";
-import styled from "styled-components";
 import {
   MdBrightnessHigh,
   MdBrightnessMedium,
@@ -33,13 +32,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { switchThemeMode } from "../redux/action/themeAction";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
-
-const Spacer = styled.div`
-  margin-top: 28px;
-  @media screen and (max-width: 900px) {
-    margin-top: 1px;
-  }
-`;
 
 const MenuBar = ({ role }) => {
   const dispatch = useDispatch();

@@ -13,6 +13,7 @@ import {
   ListItemAvatar,
   ListItemText,
   Avatar,
+  Chip,
 } from "@mui/material";
 import axios from "axios";
 import Slider from "react-slick";
@@ -23,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/action/cartAction";
 import BoxSlider from "./BoxSlider";
 import Loader from "../../components/Loader";
+import Lightbox from "react-image-lightbox";
 
 const ProductDetail = () => {
   const { t } = useTranslation();
@@ -35,6 +37,8 @@ const ProductDetail = () => {
   const [reviews, setReviews] = React.useState();
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
+  const [photo, setPhoto] = React.useState();
+  const [currenPhoto, setCurrenPhoto] = React.useState("");
 
   const addCart = (p) => {
     const product = {
@@ -52,6 +56,7 @@ const ProductDetail = () => {
   React.useEffect(() => {
     const fetchData = async () => {
       setError(null);
+      setReviews("");
       try {
         setLoading(true);
         const res = await axios.get(
@@ -68,6 +73,7 @@ const ProductDetail = () => {
         setproductCatelogyTitle(categoryTitle);
         setProductCatelogy(resCategory.data.data);
         setDataVal(res.data.data);
+        setPhoto(res.data.data[0].photo);
         setLoading(false);
       } catch (error) {
         setError(JSON.stringify(error));
@@ -76,6 +82,16 @@ const ProductDetail = () => {
     };
     fetchData();
   }, [id]);
+
+  const handleClickImage = (e, image) => {
+    e && e.preventDefault();
+    setCurrenPhoto(image);
+  };
+
+  const handleCloseModal = (e) => {
+    e && e.preventDefault();
+    setCurrenPhoto("");
+  };
 
   if (loading) {
     return <Loader />;
@@ -92,8 +108,8 @@ const ProductDetail = () => {
   const settings = {
     customPaging: function (i) {
       return (
-        <a>
-          <img src={`${dataVal && dataVal[0].photo[i]}`} />
+        <a href="/#" onClick={(e) => e.preventDefault()}>
+          <img src={`${dataVal && photo[i]}`} alt="slider" />
         </a>
       );
     },
@@ -123,23 +139,43 @@ const ProductDetail = () => {
               <Grid item xs={12} md={4}>
                 <ArrowWrapper>
                   <Slider {...settings}>
-                    {dataVal[0].photo.map((items, index) => {
+                    {photo.map((items, index) => {
                       return (
                         <div key={index}>
                           <img
                             src={items}
+                            alt="product pic"
                             style={{
-                              maxHeight: "300px",
+                              maxHeight: "250px",
                               width: "auto",
                               margin: "0 auto",
                               objectFit: "cover",
                             }}
+                            onClick={(e) => handleClickImage(e, index)}
                           />
                         </div>
                       );
                     })}
                   </Slider>
                 </ArrowWrapper>
+                {currenPhoto !== "" && (
+                  <Lightbox
+                    mainSrc={photo[currenPhoto]}
+                    onCloseRequest={handleCloseModal}
+                    nextSrc={photo[(currenPhoto + 1) % photo.length]}
+                    prevSrc={
+                      photo[(currenPhoto + photo.length - 1) % photo.length]
+                    }
+                    onMovePrevRequest={() =>
+                      setCurrenPhoto(
+                        (currenPhoto + photo.length - 1) % photo.length
+                      )
+                    }
+                    onMoveNextRequest={() =>
+                      setCurrenPhoto((currenPhoto + 1) % photo.length)
+                    }
+                  />
+                )}
               </Grid>
               <Grid item xs={12} md={8}>
                 <Typography variant="h6" gutterBottom component="div">
@@ -148,14 +184,15 @@ const ProductDetail = () => {
                 <Divider />
                 <Box
                   sx={{
-                    p: 2,
+                    p: 1,
                     backgroundColor: "#dfdfdf",
                     display: "flex",
                     justifyContent: "space-between",
+                    flexWrap: "wrap",
                   }}
                 >
                   {!!dataVal[0].discount && dataVal[0].discount !== 0 ? (
-                    <div>
+                    <div style={{ padding: "0.25rem" }}>
                       <span style={{ color: "#ff0000", fontSize: "1.5rem" }}>
                         ฿{dataVal[0].price - dataVal[0].discount}
                       </span>
@@ -164,15 +201,25 @@ const ProductDetail = () => {
                           <del>฿{dataVal[0].price}</del>
                         </sup>
                       </small>
+                      <Chip
+                        label={
+                          t("save") +
+                          " " +
+                          Math.ceil(dataVal[0].discount_percentage) +
+                          "%"
+                        }
+                        color="secondary"
+                        sx={{ ml: 1 }}
+                      />
                     </div>
                   ) : (
-                    <span style={{ fontSize: "1.5rem" }}>
+                    <span style={{ fontSize: "1.5rem", padding: "0.25rem" }}>
                       ฿{dataVal[0].price}
                     </span>
                   )}
                   <Button
                     variant="contained"
-                    sx={{ mx: 4, px: 3 }}
+                    sx={{ mx: 4, px: 3, py: "0.25rem" }}
                     color="secondary"
                     onClick={() => addCart(dataVal[0])}
                   >
@@ -247,7 +294,6 @@ const ProductDetail = () => {
                   <Typography variant="h6" component="div" gutterBottom>
                     {t("sameCategory")}
                   </Typography>
-                  {console.log(productCatelogy)}
                   <BoxSlider
                     title={productCatelogyTitle}
                     product={productCatelogy}
@@ -267,12 +313,6 @@ const ArrowWrapper = styled.div`
   .slick-prev:before,
   .slick-next:before {
     color: #e53935;
-  }
-
-  .slick-slide img {
-    height: 400px;
-    width: 100%;
-    object-fit: cover;
   }
 
   .slick-dots {
