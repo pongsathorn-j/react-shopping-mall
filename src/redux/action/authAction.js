@@ -122,7 +122,6 @@ export const signIn = (payload, navigate) => {
       navigate("/");
     } catch (error) {
       if (error.response) {
-        console.log(1)
         if (!!error?.response?.data?.error) {
           let message = error.response.data.error.message;
           dispatch(signInFailure(message));
@@ -134,7 +133,6 @@ export const signIn = (payload, navigate) => {
         let message = "Internal Error";
         dispatch(signInFailure(message));
       } else {
-        console.log(3)
         let message = "Internal Error";
         dispatch(signInFailure(message));
       }

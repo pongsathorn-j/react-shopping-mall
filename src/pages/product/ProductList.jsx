@@ -95,9 +95,9 @@ const ProductList = () => {
     getData();
   }, [pagination, itemtype]);
 
-  const handlePageChange = (event) => {
+  const handlePageChange = (event, newPages) => {
     event.preventDefault();
-    setPagination(event.target.textContent);
+    setPagination(newPages);
   };
 
   if (!!error) {
